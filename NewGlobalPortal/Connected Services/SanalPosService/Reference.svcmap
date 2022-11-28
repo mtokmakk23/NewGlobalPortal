@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="80eac5ad-8049-4a7b-a601-893a1440e0b6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="VendorPaymentService1.disco" MetadataType="Disco" ID="ffa8a57c-8651-4c91-8561-4570087104be" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?disco" />
+    <MetadataFile FileName="VendorPaymentService10.xsd" MetadataType="Schema" ID="3fef5dc3-d7da-4675-bb04-834b1a50e683" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd5" />
+    <MetadataFile FileName="VendorPaymentService1.wsdl" MetadataType="Wsdl" ID="cabe464f-801d-43a0-aa1a-262baadf5701" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?wsdl" />
+    <MetadataFile FileName="VendorPaymentService101.xsd" MetadataType="Schema" ID="d9863582-92cb-4a08-9f80-79fd94c2df45" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd7" />
+    <MetadataFile FileName="VendorPaymentService102.xsd" MetadataType="Schema" ID="9ff2d4aa-18b1-4f1d-8e44-d5d95ba63486" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd6" />
+    <MetadataFile FileName="VendorPaymentService103.xsd" MetadataType="Schema" ID="f505ebda-1132-444c-b1f4-5db76a44f3d0" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd3" />
+    <MetadataFile FileName="VendorPaymentService104.xsd" MetadataType="Schema" ID="ea9f8f13-0cec-4e0f-a6c9-9ff1b39e19d1" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd4" />
+    <MetadataFile FileName="VendorPaymentService105.xsd" MetadataType="Schema" ID="801c5194-f92b-4e41-86e2-daf0dbb3a373" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd8" />
+    <MetadataFile FileName="VendorPaymentService106.xsd" MetadataType="Schema" ID="c68d8b54-df30-4ac3-894a-545d50e9a99f" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd9" />
+    <MetadataFile FileName="VendorPaymentService107.xsd" MetadataType="Schema" ID="0b396ada-e527-47b8-a26f-71ca51022064" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd0" />
+    <MetadataFile FileName="VendorPaymentService108.xsd" MetadataType="Schema" ID="289a9c21-e3ae-4839-a50a-470d38dd7cb6" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd1" />
+    <MetadataFile FileName="VendorPaymentService109.xsd" MetadataType="Schema" ID="ffa37c1a-0a9e-4251-be4c-d92fb6e1b9f9" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

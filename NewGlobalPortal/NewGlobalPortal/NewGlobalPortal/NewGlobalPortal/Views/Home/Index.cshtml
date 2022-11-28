@@ -1,0 +1,377 @@
+﻿
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+<link href="~/css/style2.css" rel="stylesheet" />
+
+<script>
+    window.onload = function () {
+        $(".navigationanasayfa").addClass("active");
+        loading(true);
+        $.ajax({
+            url: '/Products/UrunleriGetir/',
+            type: 'POST',
+            dataType: 'text',
+            success: function (data) {
+                tableData = JSON.parse(data);
+                kategorileriListele(tableData);
+                urunleriYerlestir(tableData);
+                loading(false);
+            }
+        });
+
+    }
+
+    function urunleriYerlestir(tableData) {
+        var sliderBoyutu = 0;
+        var imgUrl = "";
+        var basliklar = [];
+        for (var i = 0; i < tableData.length; i++) {
+            imgUrl = tableData[i].itemImageList[0];
+          //  imgUrl = (tableData[i].itemImageList.length == 0) ? "/img/urun-resim-yok.png" : "data:image/png;base64," + tableData[i].itemImageList[0];
+            var fiyat = 0;
+            for (var j = 0; j < tableData[i].itemPriceList.length; j++) {
+                if ((tableData[i].itemPriceList[j].priceListCode).indexOf("#NK") != -1) {
+                    fiyat = tableData[i].itemPriceList[j].sonFiyat;
+                }
+            }
+
+            if (tableData[i].categories18Code == "HOMESLIDER") {
+                sliderBoyutu += 1;
+                $(".homeSlider").append('' +
+                    '<div class="d-md-flex testimony-29101 align-items-stretch">' +
+                    '<div class="image" style="background-image: url(\'' + imgUrl + '\');height: 374px;float: left;background-size: 100% 100%;"></div>' +
+                    '<div class="text" style="float:right;height: 374px;">' +
+                    '<blockquote>' +
+                    '<p>&ldquo;' + tableData[i].noteLarge + '&ldquo;</p>' +
+                    '<div class="author"><a href="/Products/Index?urun=' + tableData[i].itemName + '">&mdash; ' + tableData[i].itemName + '</a></div>' +
+                    '</blockquote>' +
+                    '</div>' +
+                    '</div>' +
+                    '');
+
+                $(".thumbnail").append(' <li><a href="#"><img src="' + imgUrl + '" style="width:50px;height:50px" alt="Image" class="img-fluid"></a></li>');
+
+
+            }
+
+            if (basliklar.indexOf(tableData[i].categories19Id) == -1 && tableData[i].categories19Id != "") {
+                basliklar.push(parseInt(tableData[i].categories19Id));
+                $(".basliklar").append('' +
+                    '<div class="section">' +
+                    '<div class="container">' +
+                    '<div class="row">' +
+                    '<div class="col-md-12">' +
+                    '<div class="section-title">' +
+                    '<h3 class="title">' + tableData[i].categories19Desc + '</h3>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-md-12">' +
+                    '<div class="row">' +
+                    '<div class="products-tabs">' +
+                    '<div id="tab2" class="tab-pane fade in active">' +
+                    '<div class="products-slick baslikliUrunler' + tableData[i].categories19Id + '" data-nav="#slick-nav-b' + tableData[i].categories19Id + '">' +
+                    '</div>' +
+                    '<div id="slick-nav-b' + tableData[i].categories19Id + '" class="products-slick-nav"></div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '');
+
+            }
+
+
+            if (tableData[i].categories18Code != "HOMESLIDER")
+            $(".baslikliUrunler" + tableData[i].categories19Id).append('' +
+                '<div class="product">' +
+                '<div class="product-img" style="max-height: 262px;min-height: 262px;text-align: center;">' +
+                '<img style="max-height: inherit;max-width:fit-content;margin:auto" src="' + imgUrl + '" alt="">' +
+                '<div class="product-label">' +
+                '<span class="sale">' + tableData[i].itemCode + '</span>' +
+                //'<span class="new">' + tableData[i].categories8Code + '</span>' +
+                '</div>' +
+                '</div>' +
+                '<div class="product-body" style="padding:0">' +
+                '<p class="product-category">' + tableData[i].categories8Code + '<br/>' + tableData[i].categories2Code + '</p>' +
+                '<h3 class="product-name" style="min-height:30px"><a href="#">' + tableData[i].itemName + '</a></h3>' +
+                '<h4 class="product-price">' + formatMoney(fiyat) + ' TL +KDV</h4>' +
+                '<div class="product-rating">' +
+                '<i class="fa fa-star"></i>' +
+                '<i class="fa fa-star"></i>' +
+                '<i class="fa fa-star"></i>' +
+                '<i class="fa fa-star"></i>' +
+                '<i class="fa fa-star"></i>' +
+                '</div>' +
+                //'<div class="product-btns">' +
+                //'<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>' +
+                //'<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>' +
+                //'<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>' +
+
+                //'</div>' +
+                '</div>' +
+                '<div class="add-to-cart" style="padding:5px">' +
+                '<div class="qty-label" style="width:55px;float:left">' +
+                '<div class="input-number">' +
+                '<input type="number" style="padding:0;text-align:center" value="1" id="miktar' + tableData[i].id + '" >' +
+                '</div>' +
+                '</div>' +
+                '<button class="add-to-cart-btn" onclick="sepeteEkle(\'' + tableData[i].itemCode.split("'").join(" ") + '\',' + tableData[i].id + ')"><i class="fa fa-shopping-cart"></i>Sepete Ekle</button>' +
+                '</div>' +
+                '</div>' +
+
+                '');
+        }
+
+        // Products Slick
+        $('.products-slick').each(function () {
+            var $this = $(this),
+                $nav = $this.attr('data-nav');
+            $this.slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: true,
+                infinite: true,
+                speed: 300,
+                dots: false,
+                arrows: true,
+                appendArrows: $nav ? $nav : false,
+                responsive: [{
+                    breakpoint: 991,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+                ]
+            });
+        });
+
+        var owl = $('.slide-one-item');
+
+        $('.slide-one-item').owlCarousel({
+            center: false,
+            items: 1,
+            loop: true,
+            stagePadding: 0,
+            margin: 0,
+            smartSpeed: 1500,
+            autoplay: false,
+            dots: false,
+            nav: false,
+            navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">']
+        });
+
+        $('.thumbnail li').each(function (slide_index) {
+            $(this).click(function (e) {
+                owl.trigger('to.owl.carousel', [slide_index, 1500]);
+                e.preventDefault();
+            })
+        })
+
+        owl.on('changed.owl.carousel', function (event) {
+            $('.thumbnail li').removeClass('active');
+            $('.thumbnail li').eq(event.item.index - (sliderBoyutu/2)).addClass('active');
+           // $('.thumbnail li').eq(event.item.index).addClass('active');
+        })
+    }
+    function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    function kategorileriListele(tableData) {
+      
+        var kategoriler = ["2236","2903","2389"];
+        var markalar = [];
+
+
+        for (var i = 0; i < tableData.length; i++) {
+           
+            if (markalar.indexOf(tableData[i].categories8Id) == -1) {
+                markalar.push(tableData[i].categories8Id);
+            }
+        }
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < tableData.length; j++) {
+                if (kategoriler[i] == tableData[j].categories2Id) {
+                  //  var imgUrl = (tableData[j].itemImageList.length == 0) ? "/img/urun-resim-yok.png" : "data:image/png;base64," + tableData[j].itemImageList[0];
+
+                    var kategoriIdleri = "";
+                    if (kategoriler[i] == "2236") {
+                        kategoriIdleri = "2236,2536,2154";
+                    } else if (kategoriler[i] == "2188") {
+                        kategoriIdleri = "2188";
+                    } else if (kategoriler[i] == "2389") {
+                        kategoriIdleri = "2389,2392,2393,2383";
+                    } else {
+                        kategoriIdleri = tableData[j].categories2Id;
+                    }
+                    var imgUrl = tableData[j].itemImageList[0];
+
+                    $(".Koleksyonlar").append('' +
+                        '<div class="col-md-4 col-xs-6">' +
+                        '<div class="shop">' +
+                        '<div class="shop-img">' +
+                        '<img style="height:240px" src="' + imgUrl + '" alt="">' +
+                        '</div>' +
+                        '<div class="shop-body">' +
+                        '<h3>' + tableData[j].categories2Code + '<br>Katerogisi</h3>' +
+                        '<a href="/Products/Index?kategori=' + kategoriIdleri + '" class="cta-btn">İncele <i class="fa fa-arrow-circle-right"></i></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '');
+                    break;
+                }
+            }
+        }
+
+        var rastgeleMarkaSayac = randomInt(0, (markalar.length - 2));
+        for (var i = rastgeleMarkaSayac; i < rastgeleMarkaSayac + 3; i++) {
+           
+            $(".rastgeleMarkalar").append('' +
+                '<div class="col-md-4 col-xs-6">' +
+                '<div class="section-title">' +
+                '<h4 class="title titlem' + markalar[i] + '"></h4>' +
+                '<div class="section-nav">' +
+                '<div id="slick-nav-m' + markalar[i] + '" class="products-slick-nav"></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="products-widget-slick rastgeleUrunler' + markalar[i] + '" data-nav="#slick-nav-m' + markalar[i] + '">' +
+                //buraya ürünler gelecek
+                '</div>' +
+                '</div>' +
+                '<div class="clearfix visible-sm visible-xs"></div>' +
+                '')
+            var sayac = 0;
+            var rastgeleUrunlerStr = "";
+            var temp = "";
+            for (var j = 0; j < tableData.length; j++) {
+
+                if (markalar[i] == tableData[j].categories8Id) {
+                  //  var imgUrl = (tableData[j].itemImageList.length == 0) ? "/img/urun-resim-yok.png" : "data:image/png;base64," + tableData[j].itemImageList[0];
+                    var imgUrl = tableData[j].itemImageList[0];
+                    var fiyat = 0;
+                    for (var k = 0; k < tableData[j].itemPriceList.length; k++) {
+                        if ((tableData[j].itemPriceList[k].priceListCode).indexOf("#NK") != -1) {
+                            fiyat = tableData[j].itemPriceList[k].sonFiyat;
+                        }
+                    }
+                   
+                    $(".titlem" + tableData[j].categories8Id).html(tableData[j].categories8Desc);
+
+                    if (tableData[j].categories18Code != "HOMESLIDER") {
+                        temp += '' +
+                            '<div class="product-widget">' +
+                            '<div class="product-img">' +
+                            '<img src="' + imgUrl + '" alt="">' +
+                            '</div>' +
+                            '<div class="product-body">' +
+                            '<p class="product-category">' + tableData[j].categories2Desc + '</p>' +
+                            '<h3 class="product-name"><a href="#">' + tableData[j].itemName + '</a></h3>' +
+                            '<h4 class="product-price">' + formatMoney(fiyat) + ' TL +KDV</h4>' +
+                            '</div>' +
+                            '</div>' +
+                            '';
+                        sayac++;
+                        if (sayac % 3 == 0 && sayac != 0) {
+
+                            rastgeleUrunlerStr += "<div>" + temp + "</div>";
+                            temp = "";
+
+                        }
+                    }
+                   
+                 
+
+                }
+
+            }
+            $(".rastgeleUrunler" + markalar[i]).html(rastgeleUrunlerStr + ((temp != "") ? "<div>" + temp + "</div>":""));
+        }
+        $('.products-widget-slick').each(function () {
+            var $this = $(this),
+                $nav = $this.attr('data-nav');
+
+            $this.slick({
+                infinite: true,
+                autoplay: true,
+                speed: 300,
+                dots: false,
+                arrows: true,
+                appendArrows: $nav ? $nav : false,
+            });
+        });
+
+    }
+
+
+
+</script>
+
+
+
+
+<div class="content" style="padding: 3rem 0;">
+
+    <div class="container">
+        @ViewBag.Hata
+        <div class="slider-92911">
+            <div class="owl-carousel slide-one-item homeSlider">
+
+
+
+            </div>
+
+            <div class="my-5 text-center">
+                <ul class="thumbnail" style="background: transparent;border: none;width:100%"></ul>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row Koleksyonlar">
+
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<div class="basliklar"></div>
+
+
+
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row rastgeleMarkalar">
+          
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+
+
+

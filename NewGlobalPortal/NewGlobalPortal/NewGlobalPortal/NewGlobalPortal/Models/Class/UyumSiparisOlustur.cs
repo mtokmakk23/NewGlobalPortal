@@ -1,0 +1,274 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace NewGlobalPortal.Models.Class
+{
+ 
+    public class UyunSiparisValue
+    {
+        public UyumSiparisOlustur value { get; set; }
+    }
+
+
+    public class UyumSiparisOlustur
+    {
+        public int entityId { get; set; }
+        public string entityCode { get; set; }
+        public bool isApproveByMaster { get; set; }
+        public int formContractMId { get; set; }
+        public string orderStatus { get; set; }
+        public Detail[] details { get; set; }
+        public DateTime entityRequestDate { get; set; }
+        public int docTraId { get; set; }
+        public string docTraCode { get; set; }
+        public int amtVatTra { get; set; }
+        public int amtVat { get; set; }
+        public int amtTra { get; set; }
+        public int amt { get; set; }
+        public int amtReceiptTra { get; set; }
+        public int amtReceipt { get; set; }
+        public int amtRoundTra { get; set; }
+        public int amtRound { get; set; }
+        public int curTra { get; set; }
+        public string curCode { get; set; }
+        public int curId { get; set; }
+        public int curRateTypeId { get; set; }
+        public string curRateTypeCode { get; set; }
+        public DateTime dueDate { get; set; }
+        public int dueDay { get; set; }
+        public DateTime shippingDate { get; set; }
+        public DateTime deliveryDate { get; set; }
+        public string salesPersonCode { get; set; }
+        public int salesPersonId { get; set; }
+        public int paymentPlanMId { get; set; }
+        public string paymentPlanCode { get; set; }
+        public string transportTypeCode { get; set; }
+        public int transportTypeId { get; set; }
+        public string transporterCode { get; set; }
+        public int transporterId { get; set; }
+        public int incotermsId { get; set; }
+        public string incotermsName { get; set; }
+        public int paymentMethodId { get; set; }
+        public string paymentMethodCode { get; set; }
+        public string gnlNote1 { get; set; }
+        public string gnlNote2 { get; set; }
+        public string gnlNote3 { get; set; }
+        public string gnlNote4 { get; set; }
+        public string gnlNote5 { get; set; }
+        public string gnlNote6 { get; set; }
+        public string gnlNote7 { get; set; }
+        public string gnlNote8 { get; set; }
+        public string gnlNote9 { get; set; }
+        public string gnlNote10 { get; set; }
+        public string address1 { get; set; }
+        public string address2 { get; set; }
+        public string address3 { get; set; }
+        public int cityId { get; set; }
+        public int townId { get; set; }
+        public int countyId { get; set; }
+        public string shippingAddress1 { get; set; }
+        public string shippingAddress2 { get; set; }
+        public string shippingAddress3 { get; set; }
+        public int shippingCityId { get; set; }
+        public int shippingTownId { get; set; }
+        public int shippingCountyId { get; set; }
+        public string shippingEntityCode { get; set; }
+        public int shippingEntityId { get; set; }
+        public string addressTypeCode { get; set; }
+        public bool isShippingAddressType { get; set; }
+        public string webAddress { get; set; }
+        public string firstName { get; set; }
+        public string familyName { get; set; }
+        public string email { get; set; }
+        public bool isDocDifferentCur { get; set; }
+        public string zipCode { get; set; }
+        public string shippingZipCode { get; set; }
+        public string vehicleCode { get; set; }
+        public int vehicleId { get; set; }
+        public string driverIdentifyNo { get; set; }
+        public string driverGsmNo { get; set; }
+        public string shippingDesc1 { get; set; }
+        public string transportEquipment { get; set; }
+        public string driverFamilyName { get; set; }
+        public string licencePlate { get; set; }
+        public bool isTCMB { get; set; }
+        public bool isLocalCurAction { get; set; }
+        public int coId { get; set; }
+        public string coCode { get; set; }
+        public int branchId { get; set; }
+        public string branchCode { get; set; }
+        public DateTime docDate { get; set; }
+        public string docNo { get; set; }
+        public int docNumberDId { get; set; }
+        public int catCode1Id { get; set; }
+        public string catCode1 { get; set; }
+        public int catCode2Id { get; set; }
+        public string catCode2 { get; set; }
+        public string sourceApp { get; set; }
+        public string sourceApp2 { get; set; }
+        public string sourceApp3 { get; set; }
+        public int sourceMId { get; set; }
+        public int sourceDId { get; set; }
+        public SiparisController controller { get; set; }
+        public string note1 { get; set; }
+        public string note2 { get; set; }
+        public string note3 { get; set; }
+        public int createUserId { get; set; }
+        public string currencyOption { get; set; }
+        public string entityOrderNo { get; set; }
+        public DateTime entityOrderDate { get; set; }
+        public int disc0Id { get; set; }
+        public string discCode0 { get; set; }
+        public int disc0Rate { get; set; }
+        public int amtDisc0Tra { get; set; }
+        public string discCalcType0 { get; set; }
+    }
+
+    public class SiparisController
+    {
+        public string register1 { get; set; }
+        public string register2 { get; set; }
+        public string register3 { get; set; }
+        public string register4 { get; set; }
+        public string generalNote1 { get; set; }
+        public string generalNote2 { get; set; }
+        public string generalNote3 { get; set; }
+        public string generalNote4 { get; set; }
+        public string generalNote5 { get; set; }
+        public string generalNote6 { get; set; }
+        public string generalNote7 { get; set; }
+        public string generalNote8 { get; set; }
+        public string generalNote9 { get; set; }
+        public string generalNote10 { get; set; }
+        public string noteLarge { get; set; }
+    }
+
+    public class Detail
+    {
+        public int colorId { get; set; }
+        public string colorCode { get; set; }
+        public string packageTypeCode { get; set; }
+        public int packageTypeId { get; set; }
+        public int itemId { get; set; }
+        public int expenseId { get; set; }
+        public DateTime deliveryDate { get; set; }
+        public DateTime shippingDate { get; set; }
+        public DateTime entityRequestDate { get; set; }
+        public string lineType { get; set; }
+        public int dcardId { get; set; }
+        public string dcardCode { get; set; }
+        public int unitId { get; set; }
+        public string unitCode { get; set; }
+        public int qty { get; set; }
+        public int qtyPrm { get; set; }
+        public int qtyFreePrm { get; set; }
+        public int qtyFreeSec { get; set; }
+        public int dueDay { get; set; }
+        public int campaignId { get; set; }
+        public double unitPriceTra { get; set; }
+        public double unitPrice { get; set; }
+        public string vatStatus { get; set; }
+        public int vatId { get; set; }
+        public string vatCode { get; set; }
+        public double vatRate { get; set; }
+        public double amtVat { get; set; }
+        public string abtActCode { get; set; }
+        public int abtActId { get; set; }
+        public int abtBudgetId { get; set; }
+        public string abtBudgetCode { get; set; }
+        public string otvCode { get; set; }
+        public string oivCode { get; set; }
+        public string vatDiscCode { get; set; }
+        public string priceListCode { get; set; }
+        public int priceListId { get; set; }
+        public int priceListDId { get; set; }
+        public int whouseId { get; set; }
+        public string whouseCode { get; set; }
+        public int abtBudgetD2Id { get; set; }
+        public int disc1Id { get; set; }
+        public string disc1Code { get; set; }
+        public int disc1Rate { get; set; }
+        public double amtDisc1 { get; set; }
+        public double amtDisc1Tra { get; set; }
+        public int disc2Id { get; set; }
+        public string disc2Code { get; set; }
+        public int disc2Rate { get; set; }
+        public int amtDisc2 { get; set; }
+        public int amtDisc2Tra { get; set; }
+        public int disc3Id { get; set; }
+        public string disc3Code { get; set; }
+        public int disc3Rate { get; set; }
+        public int amtDisc3 { get; set; }
+        public int amtDisc3Tra { get; set; }
+        public int amtDisc { get; set; }
+        public int amtWithDisc { get; set; }
+        public int amt { get; set; }
+        public int amtTra { get; set; }
+        public int formContractMId { get; set; }
+        public string formContractCode { get; set; }
+        public int itemAttribute1Id { get; set; }
+        public string itemAttributeCode1 { get; set; }
+        public int itemAttribute2Id { get; set; }
+        public string itemAttributeCode2 { get; set; }
+        public int itemAttribute3Id { get; set; }
+        public string itemAttributeCode3 { get; set; }
+        public int itemGnlAttribute1Id { get; set; }
+        public string itemGnlAttributeCode1 { get; set; }
+        public int itemGnlAttribute2Id { get; set; }
+        public string itemGnlAttributeCode2 { get; set; }
+        public int itemGnlAttribute3Id { get; set; }
+        public string itemGnlAttributeCode3 { get; set; }
+        public string discCalcType1 { get; set; }
+        public string discCalcType2 { get; set; }
+        public string discCalcType3 { get; set; }
+        public string referanceDocNo { get; set; }
+        public int lotId { get; set; }
+        public string lotCode { get; set; }
+        public int qualityId { get; set; }
+        public string qualityCode { get; set; }
+        public string barcode { get; set; }
+        public string itemNameManual { get; set; }
+        public int salesPersonId { get; set; }
+        public bool isItemAttribute { get; set; }
+        public int registerId { get; set; }
+        public string registerFullName { get; set; }
+        public int lineNo { get; set; }
+        public int curTraId { get; set; }
+        public string curCode { get; set; }
+        public int curRateTypeId { get; set; }
+        public string curRateTypeCode { get; set; }
+        public int curRateTra { get; set; }
+        public string note1 { get; set; }
+        public string note2 { get; set; }
+        public string note3 { get; set; }
+        public string noteLarge { get; set; }
+        public int catCode1Id { get; set; }
+        public string catCode1 { get; set; }
+        public int catCode2Id { get; set; }
+        public string catCode2 { get; set; }
+        public int sourceMId { get; set; }
+        public int sourceDId { get; set; }
+        public int sourceD3Id { get; set; }
+        public int sourceOrderMId { get; set; }
+        public int sourceOrderDId { get; set; }
+        public int costCenterId { get; set; }
+        public string costCenterCode { get; set; }
+        public int projectMId { get; set; }
+        public string projectCode { get; set; }
+        public int gainLossTypeId { get; set; }
+        public string gainLossTypeCode { get; set; }
+        public string analysisCode { get; set; }
+        public int analysisId { get; set; }
+        public string taxTemplateName { get; set; }
+        public int taxTemplateMId { get; set; }
+        public string plusMinus { get; set; }
+        public string contactName { get; set; }
+        public int contactId { get; set; }
+        public string sourceApp { get; set; }
+        public string sourceApp2 { get; set; }
+        public string sourceApp3 { get; set; }
+    }
+
+}

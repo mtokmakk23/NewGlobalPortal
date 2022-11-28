@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="VendorPaymentService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.VendorPaymentService" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.VendorPaymentService" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.VendorPaymentIntegrationWebService.Models" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/eCozum.Practices.VPos.Entity" />
+      <xsd:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.Messages" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IVendorPaymentService_GetCampaignList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCampaignList" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetCampaignList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCampaignListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetTransactionByOrderReferenceForStatusInquiry_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionByOrderReferenceForStatusInquiry" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetTransactionByOrderReferenceForStatusInquiry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionByOrderReferenceForStatusInquiryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_ProcessPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessPayment" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_ProcessPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_CommitPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:CommitPayment" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_CommitPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CommitPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetTransactionByOrderReference_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionByOrderReference" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetTransactionByOrderReference_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionByOrderReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetTransactionByClientOrderReference_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionByClientOrderReference" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetTransactionByClientOrderReference_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionByClientOrderReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SaleDefaultPos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaleDefaultPos" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SaleDefaultPos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaleDefaultPosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendFailed3DResultPro_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFailed3DResultPro" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendFailed3DResultPro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendFailed3DResultProResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendApproved3DResultPro_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendApproved3DResultPro" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendApproved3DResultPro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendApproved3DResultProResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendFailed3DResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFailed3DResult" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendFailed3DResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendFailed3DResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendApproved3DResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendApproved3DResult" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SendApproved3DResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendApproved3DResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetVirtualPosList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosList" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetVirtualPosList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetVirtualPosListBinNumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosListBinNumber" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetVirtualPosListBinNumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosListBinNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetVirtualPosListWithBinInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosListWithBinInfo" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_GetVirtualPosListWithBinInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosListWithBinInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_Get3DContentDefaultPos_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get3DContentDefaultPos" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_Get3DContentDefaultPos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get3DContentDefaultPosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_Get3DContent_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get3DContent" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_Get3DContent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get3DContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_Sale_InputMessage">
+    <wsdl:part name="parameters" element="tns:Sale" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_Sale_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_CancelByReferenceCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelByReferenceCode" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_CancelByReferenceCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelByReferenceCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_CancelByClientReferenceCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelByClientReferenceCode" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_CancelByClientReferenceCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelByClientReferenceCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_RecurringPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecurringPayment" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_RecurringPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecurringPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_RecurringPaymentQuery_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecurringPaymentQuery" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_RecurringPaymentQuery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecurringPaymentQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SaveCreditCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCreditCard" />
+  </wsdl:message>
+  <wsdl:message name="IVendorPaymentService_SaveCreditCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCreditCardResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IVendorPaymentService">
+    <wsdl:operation name="GetCampaignList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/GetCampaignList" message="tns:IVendorPaymentService_GetCampaignList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/GetCampaignListResponse" message="tns:IVendorPaymentService_GetCampaignList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionByOrderReferenceForStatusInquiry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/GetTransactionByOrderReferenceForStatusInquiry" message="tns:IVendorPaymentService_GetTransactionByOrderReferenceForStatusInquiry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/GetTransactionByOrderReferenceForStatusInquiryResponse" message="tns:IVendorPaymentService_GetTransactionByOrderReferenceForStatusInquiry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/ProcessPayment" message="tns:IVendorPaymentService_ProcessPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/ProcessPaymentResponse" message="tns:IVendorPaymentService_ProcessPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CommitPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/CommitPayment" message="tns:IVendorPaymentService_CommitPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/CommitPaymentResponse" message="tns:IVendorPaymentService_CommitPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionByOrderReference">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/GetTransactionByOrderReference" message="tns:IVendorPaymentService_GetTransactionByOrderReference_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/GetTransactionByOrderReferenceResponse" message="tns:IVendorPaymentService_GetTransactionByOrderReference_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionByClientOrderReference">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/GetTransactionByClientOrderReference" message="tns:IVendorPaymentService_GetTransactionByClientOrderReference_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/GetTransactionByClientOrderReferenceResponse" message="tns:IVendorPaymentService_GetTransactionByClientOrderReference_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaleDefaultPos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/SaleDefaultPos" message="tns:IVendorPaymentService_SaleDefaultPos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/SaleDefaultPosResponse" message="tns:IVendorPaymentService_SaleDefaultPos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFailed3DResultPro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/SendFailed3DResultPro" message="tns:IVendorPaymentService_SendFailed3DResultPro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/SendFailed3DResultProResponse" message="tns:IVendorPaymentService_SendFailed3DResultPro_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendApproved3DResultPro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/SendApproved3DResultPro" message="tns:IVendorPaymentService_SendApproved3DResultPro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/SendApproved3DResultProResponse" message="tns:IVendorPaymentService_SendApproved3DResultPro_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFailed3DResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/SendFailed3DResult" message="tns:IVendorPaymentService_SendFailed3DResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/SendFailed3DResultResponse" message="tns:IVendorPaymentService_SendFailed3DResult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendApproved3DResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/SendApproved3DResult" message="tns:IVendorPaymentService_SendApproved3DResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/SendApproved3DResultResponse" message="tns:IVendorPaymentService_SendApproved3DResult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/GetVirtualPosList" message="tns:IVendorPaymentService_GetVirtualPosList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/GetVirtualPosListResponse" message="tns:IVendorPaymentService_GetVirtualPosList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosListBinNumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/GetVirtualPosListBinNumber" message="tns:IVendorPaymentService_GetVirtualPosListBinNumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/GetVirtualPosListBinNumberResponse" message="tns:IVendorPaymentService_GetVirtualPosListBinNumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosListWithBinInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/GetVirtualPosListWithBinInfo" message="tns:IVendorPaymentService_GetVirtualPosListWithBinInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/GetVirtualPosListWithBinInfoResponse" message="tns:IVendorPaymentService_GetVirtualPosListWithBinInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get3DContentDefaultPos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/Get3DContentDefaultPos" message="tns:IVendorPaymentService_Get3DContentDefaultPos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/Get3DContentDefaultPosResponse" message="tns:IVendorPaymentService_Get3DContentDefaultPos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get3DContent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/Get3DContent" message="tns:IVendorPaymentService_Get3DContent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/Get3DContentResponse" message="tns:IVendorPaymentService_Get3DContent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Sale">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/Sale" message="tns:IVendorPaymentService_Sale_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/SaleResponse" message="tns:IVendorPaymentService_Sale_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelByReferenceCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/CancelByReferenceCode" message="tns:IVendorPaymentService_CancelByReferenceCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/CancelByReferenceCodeResponse" message="tns:IVendorPaymentService_CancelByReferenceCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelByClientReferenceCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/CancelByClientReferenceCode" message="tns:IVendorPaymentService_CancelByClientReferenceCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/CancelByClientReferenceCodeResponse" message="tns:IVendorPaymentService_CancelByClientReferenceCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecurringPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/RecurringPayment" message="tns:IVendorPaymentService_RecurringPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/RecurringPaymentResponse" message="tns:IVendorPaymentService_RecurringPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecurringPaymentQuery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/RecurringPaymentQuery" message="tns:IVendorPaymentService_RecurringPaymentQuery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/RecurringPaymentQueryResponse" message="tns:IVendorPaymentService_RecurringPaymentQuery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCreditCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IVendorPaymentService/SaveCreditCard" message="tns:IVendorPaymentService_SaveCreditCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IVendorPaymentService/SaveCreditCardResponse" message="tns:IVendorPaymentService_SaveCreditCard_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IVendorPaymentService" type="tns:IVendorPaymentService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCampaignList">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/GetCampaignList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionByOrderReferenceForStatusInquiry">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/GetTransactionByOrderReferenceForStatusInquiry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessPayment">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/ProcessPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommitPayment">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/CommitPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionByOrderReference">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/GetTransactionByOrderReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionByClientOrderReference">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/GetTransactionByClientOrderReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaleDefaultPos">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/SaleDefaultPos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFailed3DResultPro">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/SendFailed3DResultPro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendApproved3DResultPro">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/SendApproved3DResultPro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFailed3DResult">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/SendFailed3DResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendApproved3DResult">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/SendApproved3DResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosList">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/GetVirtualPosList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosListBinNumber">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/GetVirtualPosListBinNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosListWithBinInfo">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/GetVirtualPosListWithBinInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get3DContentDefaultPos">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/Get3DContentDefaultPos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get3DContent">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/Get3DContent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sale">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/Sale" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelByReferenceCode">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/CancelByReferenceCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelByClientReferenceCode">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/CancelByClientReferenceCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecurringPayment">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/RecurringPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecurringPaymentQuery">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/RecurringPaymentQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCreditCard">
+      <soap:operation soapAction="http://tempuri.org/IVendorPaymentService/SaveCreditCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VendorPaymentService">
+    <wsdl:port name="BasicHttpBinding_IVendorPaymentService" binding="tns:BasicHttpBinding_IVendorPaymentService">
+      <soap:address location="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

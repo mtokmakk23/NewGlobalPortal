@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/eCozum.Practices.VPos.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/eCozum.Practices.VPos.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="RecurringPaymentResponseBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualPaymentDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Appr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AutCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HostKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceivedValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResultType" type="tns:ResultType" />
+      <xs:element minOccurs="0" name="SendValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecurringPaymentResponseBase" nillable="true" type="tns:RecurringPaymentResponseBase" />
+  <xs:simpleType name="ResultType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MerchantSafeError" />
+      <xs:enumeration value="SaleError" />
+      <xs:enumeration value="Success" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ResultType" nillable="true" type="tns:ResultType" />
+</xs:schema>

@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Yeni Şifre Oluştur</title>
+  
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script>
+        function yeniSifreOlustur() {
+            var veriler = {
+                kullaniciID: "@Html.Raw(ViewBag.kullaniciID)",
+                adiSoyadi:"@Html.Raw(ViewBag.AdiSoyadi)",
+                kullaniciAdi:"@Html.Raw(ViewBag.KullaniciAdi)",
+                yeniSifre: $("#yeniSifre").val(),
+                yeniSifreTekrar: $("#yeniSifreTekrar").val()
+            }
+           
+            $.ajax({
+                url: '/Activation/NewPassword/',
+                type: 'POST',
+                dataType: 'text',
+                data: veriler,
+                success: function (data) {
+                    if (JSON.parse(data).IsSuccessful) {
+                        alert(JSON.parse(data).Content);
+                        window.location = "/Login/Index";
+                    } else {
+                        alert(JSON.parse(data).Content);
+                    }
+                    
+                   
+                  
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="float:none;margin:auto;margin-top:15px">
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-4">Adı Soyadı</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="adiSoyadi" value="@Html.Raw(ViewBag.AdiSoyadi)" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none">
+
+                        <label class="col-md-4">Kullanıcı Adı</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="kullaniciAdi" value="@Html.Raw(ViewBag.KullaniciAdi)" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4">Yeni Şifre</label>
+                        <div class="col-md-8">
+                            <input type="password" class="form-control" id="yeniSifre" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4">Yeni Şifre Tekrar</label>
+                        <div class="col-md-8">
+                            <input type="password" class="form-control" id="yeniSifreTekrar" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 text-center">
+                            <a class="btn btn-primary btn-sm" onclick="yeniSifreOlustur()">KAYDET</a>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</body>
+
+</html>

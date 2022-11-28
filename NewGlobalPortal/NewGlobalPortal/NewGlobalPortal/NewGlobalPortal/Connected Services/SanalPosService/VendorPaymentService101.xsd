@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.VendorPaymentIntegrationWebService.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.VendorPaymentIntegrationWebService.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" />
+  <xs:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.VendorPaymentService" />
+  <xs:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.VendorPaymentService" />
+  <xs:complexType name="VirtualPosListResult">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" minOccurs="0" name="CardBin" nillable="true" type="q1:CardBinInfo" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.VendorPaymentService" minOccurs="0" name="VirtualPoses" nillable="true" type="q2:ArrayOfVirtualPos" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VirtualPosListResult" nillable="true" type="tns:VirtualPosListResult" />
+  <xs:complexType name="SaveCreditCardRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardHolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cvv" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpMonth" type="xs:int" />
+      <xs:element minOccurs="0" name="ExpYear" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SaveCreditCardRequest" nillable="true" type="tns:SaveCreditCardRequest" />
+  <xs:complexType name="TokenProcessResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.VendorPaymentService" base="q3:ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SaveCreditCardDetail" nillable="true" type="tns:ArrayOfSaveCreditCardDetail" />
+          <xs:element minOccurs="0" name="TokenString" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TokenProcessResult" nillable="true" type="tns:TokenProcessResult" />
+  <xs:complexType name="ArrayOfSaveCreditCardDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SaveCreditCardDetail" nillable="true" type="tns:SaveCreditCardDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSaveCreditCardDetail" nillable="true" type="tns:ArrayOfSaveCreditCardDetail" />
+  <xs:complexType name="SaveCreditCardDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MerchantSafeKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VendorVPosId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SaveCreditCardDetail" nillable="true" type="tns:SaveCreditCardDetail" />
+</xs:schema>

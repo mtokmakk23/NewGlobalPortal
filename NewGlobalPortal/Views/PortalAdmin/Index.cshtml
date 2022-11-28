@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Ayarlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    window.onload = function () {
+        cariler();
+    }
+    var tableDataCariler;
+    function cariler() {
+        loading(true);
+        $.ajax({
+            url: '/PortalAdmin/CarileriGetir/',
+            type: 'POST',
+            dataType: 'text',
+            success: function (data) {
+                tableDataCariler = JSON.parse(data);
+                for (var i = 0; i < tableDataCariler.entitY_M.length; i++) {
+                    $("#cariler").append('<option value="' + tableDataCariler.entitY_M[i].id + '">' + tableDataCariler.entitY_M[i].entityName+'</option>');
+                }
+                kullanicilar();
+                loading(false);
+            }
+        });
+    }
+
+    function kullanicilar() {
+        $("#adminKullanicilariDivi").html('<table class="table table-striped" id="adminKullanicilari">'+
+                        '<thead>'+
+                        '<tr>'+
+                            '<th>Kullanıcı Adı</th>'+
+                            '<th>Adı Soyadı</th>'+
+                            '<th>Mail Adresi</th>'+
+                            '<th>Gsm</th>'+
+                            '<th>Admin Mi</th>'+
+                            '<th>Yetkili Olduğu Cari</th>'+
+                            '<th></th>'+
+                        '</tr>'+
+                        '</thead>'+
+                        '<tbody></tbody> '+
+            '</table>');
+        loading(true);
+        var cariAdi = "";
+        $("#adminKullanicilari tbody").html("");
+        $.ajax({
+            url: '/PortalAdmin/kullanicilar/',
+            type: 'POST',
+            dataType: 'text',
+            success: function (data) {
+                tableDataKullanicilar = JSON.parse(data);
+                for (var i = 0; i < tableDataKullanicilar.length; i++) {
+                     cariAdi = "";
+                    for (var j = 0; j < tableDataCariler.entitY_M.length; j++) {
+                        debugger;
+                        if (tableDataKullanicilar[i].YetkiliOlduguCariIdleri == tableDataCariler.entitY_M[j].id) {
+                            cariAdi = tableDataCariler.entitY_M[j].entityName;
+                            break;
+                        }
+                        
+                    }
+                    $("#adminKullanicilari tbody").append('<tr>' +
+                        '<td>' + tableDataKullanicilar[i].KullaniciAdi+'</td>'+
+                        '<td>' + tableDataKullanicilar[i].AdiSoyadi+'</td>'+
+                        '<td>' + tableDataKullanicilar[i].MailAdresi+'</td>'+
+                        '<td>' + tableDataKullanicilar[i].Gsm + '</td>' +
+                        '<td>' + ((tableDataKullanicilar[i].AdminMi=="1")?"Evet":"Hayır") + '</td>' +
+                        '<td>' + cariAdi+'</td>'+
+                        '<td><a class="btn btn-danger btn-sm" onclick="KullaniciSil(' + tableDataKullanicilar[i].LOGICALREF+')">Sil</a></td>'+
+                        '</tr>');
+                }
+               
+                $("#adminKullanicilari").dataTable({
+                    
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'excel'
+                    ]
+                });
+                loading(false);
+            }
+        });
+    }
+
+    function Kaydet() {
+        var veriler = {
+            cariAdi: $("#cariler option:selected").text(),
+            cariId: $("#cariler option:selected").val(),
+            kullaniciAdi: $("#kullaniciAdi").val(),
+            adiSoyadi: $("#adiSoyadi").val(),
+            mailAdresi: $("#mailAdresi").val(),
+            gsm: $("#gsm").val()
+           
+        }
+        loading(true);
+        $.ajax({
+            url: '/PortalAdmin/adminEkle/',
+            type: 'POST',
+            dataType: 'text',
+            data: veriler,
+            success: function (data) {
+                loading(false);
+                var result = JSON.parse(data);
+                if (Boolean(result.IsSuccessful)) {
+                    $("input[type=text]").val("");
+                    $("textarea").val("");
+                    kullanicilar();
+                    onayMesaji(result.Content);
+                } else {
+                    hataMesajı(result.Content);
+                }
+
+            }
+        });
+    }
+
+    function KullaniciSil(LOGICALREF) {
+        var sonuc = confirm("Silinen Kullanıcı Geri Alınamaz.\n Bu Kullanıcıyı Silmek İstiyor Musunuz?");
+        if (sonuc) {
+            var veriler = {
+                LOGICALREF: LOGICALREF,
+               
+            }
+            loading(true);
+            $.ajax({
+                url: '/PortalAdmin/KullaniciSil/',
+                type: 'POST',
+                dataType: 'text',
+                data: veriler,
+                success: function (data) {
+                    loading(false);
+                    var result = JSON.parse(data);
+                    if (Boolean(result.IsSuccessful)) {
+                        kullanicilar();
+                        onayMesaji(result.Content);
+                    } else {
+                        hataMesajı(result.Content);
+                    }
+
+                }
+            });
+        }
+    }
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 kullaniciEkleDivi" style="padding-top:10px;">
+            <div class="form-group row">
+                <label class="col-md-3">Yetkili Olacağı Cari</label>
+                <div class="col-md-9">
+                    <select class="form-control" id="cariler"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Kullanıcı Adı</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="kullaniciAdi" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Adı-Soyadı</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="adiSoyadi" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Mail Adresi</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="mailAdresi" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Gsm</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="gsm" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-md-12 text-center yeniAdminEkleButtonDivi">
+                    <a class="btn btn-primary btn-sm" onclick="Kaydet()">KAYDET</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="adminKullanicilariDivi"></div>
+
+

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.VendorPaymentService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.VendorPaymentService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" />
+  <xs:import schemaLocation="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" />
+  <xs:complexType name="AuthenticationInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthenticationInfo" nillable="true" type="tns:AuthenticationInfo" />
+  <xs:complexType name="CampaignProcessParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreditCardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VPosId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CampaignProcessParameters" nillable="true" type="tns:CampaignProcessParameters" />
+  <xs:complexType name="StatusInquiryTransaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HostKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Is3D" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProvisionNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TransactionStatusId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StatusInquiryTransaction" nillable="true" type="tns:StatusInquiryTransaction" />
+  <xs:complexType name="SaleParameters">
+    <xs:sequence>
+      <xs:element name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BonusId" type="xs:int" />
+      <xs:element minOccurs="0" name="ClientReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreditCard" nillable="true" type="tns:CreditCard" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="CustomData" nillable="true" type="q1:ArrayOfCustomDynamicData" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element name="Installment" type="xs:int" />
+      <xs:element minOccurs="0" name="ReturnUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Use3d" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UseSafeKey" type="xs:boolean" />
+      <xs:element name="VirtualPosId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SaleParameters" nillable="true" type="tns:SaleParameters" />
+  <xs:complexType name="CreditCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardHolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CvcNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpMonth" type="xs:int" />
+      <xs:element minOccurs="0" name="ExpYear" type="xs:int" />
+      <xs:element minOccurs="0" name="MerchantSafeKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SaveCreditCard" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditCard" nillable="true" type="tns:CreditCard" />
+  <xs:complexType name="SaleResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankResult" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" minOccurs="0" name="CardBin" nillable="true" type="q2:CardBinInfo" />
+      <xs:element minOccurs="0" name="ClientReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HostKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InternalMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ThreeDUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TokenResult" nillable="true" type="tns:CreditCardSaveResult" />
+      <xs:element minOccurs="0" name="TransactionId" type="xs:int" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" minOccurs="0" name="TransactionInfo" nillable="true" type="q3:TransactionInfo" />
+      <xs:element minOccurs="0" name="TransactionStatusId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SaleResult" nillable="true" type="tns:SaleResult" />
+  <xs:complexType name="CreditCardSaveResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExceptionCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExceptionMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SaveCreditCardDetail" nillable="true" type="tns:ArrayOfCreditCardTokenDetail" />
+      <xs:element minOccurs="0" name="TokenString" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditCardSaveResult" nillable="true" type="tns:CreditCardSaveResult" />
+  <xs:complexType name="ArrayOfCreditCardTokenDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCardTokenDetail" nillable="true" type="tns:CreditCardTokenDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditCardTokenDetail" nillable="true" type="tns:ArrayOfCreditCardTokenDetail" />
+  <xs:complexType name="CreditCardTokenDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MerchantSafeKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VendorVPosId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditCardTokenDetail" nillable="true" type="tns:CreditCardTokenDetail" />
+  <xs:complexType name="CommitParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentGuid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CommitParameters" nillable="true" type="tns:CommitParameters" />
+  <xs:complexType name="Transaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardHolderEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardHolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardHolderPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardHolderTCKN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardNumberFirst6" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardNumberLast4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ComissionRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ComissionType" type="xs:int" />
+      <xs:element minOccurs="0" name="CurrencyCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CurrencyProccessAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CurrencyProccessNetAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DefaultPOSUsed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PaymentId" type="xs:int" />
+      <xs:element minOccurs="0" name="PaymentInfo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentSetId" type="xs:int" />
+      <xs:element minOccurs="0" name="PaymentSetName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentType" type="xs:int" />
+      <xs:element minOccurs="0" name="Period" type="xs:int" />
+      <xs:element minOccurs="0" name="PlusPeriod" type="xs:int" />
+      <xs:element minOccurs="0" name="ProccessAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProccessNetAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceType" type="xs:int" />
+      <xs:element minOccurs="0" name="TransactionStatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="VPosId" type="xs:int" />
+      <xs:element minOccurs="0" name="VposCommRate" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Transaction" nillable="true" type="tns:Transaction" />
+  <xs:complexType name="PaymentProccessParameters">
+    <xs:sequence>
+      <xs:element name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BonusProgramId" type="xs:int" />
+      <xs:element minOccurs="0" name="ClientReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreditCard" nillable="true" type="tns:CreditCard" />
+      <xs:element name="Installment" type="xs:int" />
+      <xs:element minOccurs="0" name="UseSafeKey" type="xs:boolean" />
+      <xs:element name="VirtualPosId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentProccessParameters" nillable="true" type="tns:PaymentProccessParameters" />
+  <xs:complexType name="PaymentProccessResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankCommAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BankCommRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BankErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankResults" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankServiceCommAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BankServiceCommRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BonusText" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" minOccurs="0" name="CardBin" nillable="true" type="q4:CardBinInfo" />
+      <xs:element minOccurs="0" name="ClientReferenceCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerCommAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CustomerCommApplyType" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerCommRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="HostKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InternalMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReferenceCode" nillable="true" type="xs:string" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF" minOccurs="0" name="TransactionInfo" nillable="true" type="q5:TransactionInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentProccessResult" nillable="true" type="tns:PaymentProccessResult" />
+  <xs:complexType name="ArrayOfNameValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NameValue" nillable="true" type="tns:NameValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNameValue" nillable="true" type="tns:ArrayOfNameValue" />
+  <xs:complexType name="NameValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NameValue" nillable="true" type="tns:NameValue" />
+  <xs:complexType name="ArrayOfVirtualPos">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VirtualPos" nillable="true" type="tns:VirtualPos" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVirtualPos" nillable="true" type="tns:ArrayOfVirtualPos" />
+  <xs:complexType name="VirtualPos">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ComissionRates" nillable="true" type="tns:ArrayOfComissionRate" />
+      <xs:element minOccurs="0" name="DefaultPosComissionRate" nillable="true" type="tns:ComissionRate" />
+      <xs:element minOccurs="0" name="IsDefaultPos" type="xs:boolean" />
+      <xs:element minOccurs="0" name="VPosId" type="xs:int" />
+      <xs:element minOccurs="0" name="VPosName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VirtualPos" nillable="true" type="tns:VirtualPos" />
+  <xs:complexType name="ArrayOfComissionRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ComissionRate" nillable="true" type="tns:ComissionRate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfComissionRate" nillable="true" type="tns:ArrayOfComissionRate" />
+  <xs:complexType name="ComissionRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankPaymentOn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="In" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InstallmentDefferralEndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="InstallmentDefferralStartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Instalment" type="xs:int" />
+      <xs:element minOccurs="0" name="InstalmentOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActivePlusInstallmentDateRule" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MaxInstallmentLimit" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MinInstallmentLimit" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Note" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Out" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PaymentDeferral" type="xs:int" />
+      <xs:element minOccurs="0" name="PaymentDeferralLowerLimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PaymentDeferralOverLimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PlusInstallmentEndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PlusInstallmentStartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PlusInstalment" type="xs:int" />
+      <xs:element minOccurs="0" name="PlusInstalmentLowerLimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PlusInstalmentOverLimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceCommRate" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ComissionRate" nillable="true" type="tns:ComissionRate" />
+  <xs:complexType name="Payment3DContent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FormPostContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InternalMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReferenceCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Payment3DContent" nillable="true" type="tns:Payment3DContent" />
+  <xs:complexType name="RecurringPaymentProcessParameters">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:PaymentProccessParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FrequencyInterval" type="xs:int" />
+          <xs:element minOccurs="0" name="FrequencyTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentCount" type="xs:int" />
+          <xs:element minOccurs="0" name="SendEmail" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UseExistingCreditCard" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RecurringPaymentProcessParameters" nillable="true" type="tns:RecurringPaymentProcessParameters" />
+</xs:schema>

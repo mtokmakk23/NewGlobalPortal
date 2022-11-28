@@ -1,0 +1,399 @@
+﻿
+@{
+    ViewBag.Title = "Siparişi Tamamla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    window.onload = function () {
+        $("#towN").html("<option value='-1'>Seçiniz.</option>");
+        $("#city").html("<option value='-1'>Seçiniz.</option>");
+        sehirleriGetir();
+        sepetiCek();
+    }
+
+    function sehirleriGetir() {
+        $("#city").html("<option value='-1'>Seçiniz.</option>");
+        $("#towN").html("<option value='-1'>Seçiniz.</option>");
+        $.ajax({
+            url: '/Products/sehirleriGetir/',
+            type: 'POST',
+            dataType: 'text',
+            success: function (data) {
+                var result = JSON.parse(data);
+                $("#city").html("<option value='-1'>Seçiniz.</option>");
+
+                for (var i = 0; i < result.result.length; i++) {
+                    $("#city").append("<option value='" + result.result[i].citY_ID + "'>" + result.result[i].citY_NAME + "</option>");
+                }
+                ilceleriGetir();
+            }
+        });
+    }
+    function ilceleriGetir() {
+        var theData = {
+            citY_ID: $("#city option:selected").val(),
+        }
+        $("#towN").html("<option value='-1'>Seçiniz.</option>");
+        $.ajax({
+            url: '/Products/ilceleriGetir/',
+            type: 'POST',
+            dataType: 'text',
+            data: theData,
+            success: function (data) {
+                var result = JSON.parse(data);
+                for (var i = 0; i < result.result.length; i++) {
+                    $("#towN").append("<option value='" + result.result[i].towN_ID + "'>" + result.result[i].towN_NAME + "</option>");
+                }
+
+            }
+        });
+    }
+    var SiparisSonTutar;
+    var GBaslikRef = -1;
+    function sepetiCek() {
+        GBaslikRef = -1;
+        SiparisSonTutar = 0;
+        $(".order-productss").html("");
+        loading(true);
+        sepetBilgileriniCek();
+        $.ajax({
+            url: '/Products/SepetCek/',
+            type: 'POST',
+            dataType: 'text',
+            success: function (data) {
+                var result = JSON.parse(data);
+                var araToplam = 0;
+                var kdvToplam = 0;
+                var tevkifatToplam = 0;
+                for (var i = 0; i < result.length; i++) {
+                    var imgUrl = (result[i].Url.length == 0) ? "/img/urun-resim-yok.png" : "data:image/png;base64," + result[i].Url;
+                    GBaslikRef = result[i].BaslikRef;
+                    $("#siparisiTamamlaButton").attr("onclick", "siparisiTamamla(" + result[i].BaslikRef + ")");
+                   
+               
+                    
+              
+                        $(".order-productss").append('<tr style="border: 5px solid white;">' +
+                            ' <td class="product-widget"><button class="delete" onclick="urunusepettenSil(' + result[i].LOGICALREF + ')"><i class="fa fa-close"></i></button><img style="width:70px" src="' + imgUrl + '" alt=""></td><td><b>' + result[i].UrunAdi + '</b><div class="input-number"><input type="number" onkeyup="sepetMiktariGuncelle(this)" id="' + result[i].LOGICALREF + '" style="padding:0;text-align:center;height:20px;width:70px;float:left" value="' + result[i].Miktar + '" disabled="disabled"></div>&nbsp; x &nbsp;' + formatMoney(result[i].IndirimliFiyat) + ' TL</td><td>' + formatMoney(parseFloat(result[i].Miktar) * parseFloat(result[i].IndirimliFiyat)) + ' TL</td></tr>' +
+                            '</tr>');
+                    
+                    araToplam += parseFloat(result[i].IndirimliFiyat) * parseFloat(result[i].Miktar);
+                    if (result[i].TevkifatKodu == "" || result[i].TevkifatKodu == null) {
+                        kdvToplam += parseFloat(result[i].IndirimliFiyat) * (parseFloat(result[i].KdvOrani) / 100) * parseFloat(result[i].Miktar);
+
+                    } else {
+
+                        kdvToplam += (parseFloat(result[i].IndirimliFiyat) * (parseFloat(result[i].KdvOrani) / 100)) * parseFloat(result[i].Miktar);
+                        tevkifatToplam += (parseFloat(result[i].IndirimliFiyat) * (parseFloat(result[i].KdvOrani) / 100) * (parseFloat(result[i].TevkifatKodu.split('/')[0]) / parseFloat(result[i].TevkifatKodu.split('/')[1]))) * parseFloat(result[i].Miktar);
+
+                    }
+                }
+                $(".sepetTutari").html('' +
+                    '<div class="order-col">' +
+                    '<div><strong>ARA TOPLAM</strong></div>' +
+                    '<div><strong class="order-total">' + formatMoney(araToplam) + ' TL</strong></div>' +
+                    '</div>' +
+                    '<div class="order-col">' +
+                    '<div><strong>KDV</strong></div>' +
+                    '<div><strong class="order-total">' + formatMoney(kdvToplam) + ' TL</strong></div>' +
+                    '</div>' +
+                    '<div class="order-col">' +
+                    '<div><strong>TEVKİFAT</strong></div>' +
+                    '<div><strong class="order-total">' + ((tevkifatToplam != 0) ? '-' + formatMoney(tevkifatToplam) + 'TL' : '') + '</strong></div>' +
+                    '</div>' +
+                    '<div class="order-col">' +
+                    '<div><strong>GENEL TOPLAM</strong></div>' +
+                    '<div><strong class="order-total">' + formatMoney(araToplam + kdvToplam - tevkifatToplam) + ' TL</strong></div>' +
+                    '</div>' +
+                    '');
+                SiparisSonTutar = araToplam + kdvToplam - tevkifatToplam;
+                loading(false);
+            }
+        });
+    }
+    function urunusepettenSil(logicalref) {
+        var theData = {
+            LOGICALREF: logicalref,
+        }
+        $.ajax({
+            url: '/Products/SepettenSil/',
+            type: 'POST',
+            dataType: 'text',
+            data: theData,
+            success: function (data) {
+                var result = JSON.parse(data);
+                if (Boolean(result.IsSuccessful)) {
+                    sepetiCek();
+                } else {
+                    hataMesajı(result.Content);
+                }
+
+            }
+        });
+    }
+
+
+
+    function sepetMiktariGuncelle(input) {
+
+        var miktar = "";
+        $(".order-productss").html("");
+
+        if ($(input).val() == "") {
+            miktar = 0;
+        } else {
+            miktar = $(input).val();
+        }
+        var veriler = {
+            LOGICALREF: $(input).attr("id"),
+            Miktar: miktar
+        }
+        loading(true);
+        $.ajax({
+            url: '/Products/SepetMiktarlariniGuncelle/',
+            type: 'POST',
+            dataType: 'text',
+            data: veriler,
+            success: function (data) {
+                var result = JSON.parse(data);
+                loading(true);
+                if (Boolean(result.IsSuccessful)) {
+
+                    sepetiCek();
+                } else {
+                    hataMesajı(result.Content);
+                }
+
+            }
+        });
+
+
+
+
+    }
+
+    function odemeTipineGoreFiyatlariGuncelle(radio) {
+        $(".TaksitBilgileriContainer").css("display", "none");
+        if ($(radio).attr("data-value") == "#KK1" || $(radio).attr("data-value") == "#KKT") {
+            $("#siparisiTamamlaButton").html("ÖDEMEYE GEÇ");
+        } else {
+            $("#siparisiTamamlaButton").html("SİPARİŞİ TAMAMLA");
+        }
+        var veriler = {
+            OdemeTipi: $(radio).attr("data-value"),
+
+        }
+        loading(true);
+        $.ajax({
+            url: '/Products/odemeTipineGoreFiyatlariGuncelle/',
+            type: 'POST',
+            dataType: 'text',
+            data: veriler,
+            success: function (data) {
+                var result = JSON.parse(data);
+                loading(false);
+                if (Boolean(result.IsSuccessful)) {
+
+                    sepetiCek();
+                    onayMesaji(result.Content);
+                } else {
+                    hataMesajı(result.Content);
+                }
+
+            }
+        });
+    }
+
+    function siparisiTamamla(BaslikLogicalref) {
+        var odemeTipi = "";
+        if ($("#payment-1").is(":checked")) {
+            odemeTipi = $("#payment-1").attr("data-value");
+        }
+        if ($("#payment-2").is(":checked")) {
+            odemeTipi = $("#payment-2").attr("data-value");
+        }
+        if ($("#payment-3").is(":checked")) {
+            odemeTipi = $("#payment-3").attr("data-value");
+        }
+        if ($("#payment-4").is(":checked")) {
+            odemeTipi = $("#payment-4").attr("data-value");
+        }
+
+        var veriler = {
+            BaslikLogicalref: BaslikLogicalref,
+            OdemeTipi: odemeTipi,
+            ilgiliKisi: $("#ilgiliKisi").val(),
+            tel: $("#tel").val(),
+            detayliAdres: $("#detayliAdres").val(),
+            city: $("#city option:selected").val(),
+            towN: $("#towN option:selected").val(),
+            siparisAciklamasi: $("#siparisNotu").val()
+        }
+        if ($("#city option:selected").val() != "-1" && $("#towN option:selected").val() == "-1") {
+            hataMesajı("Lütfen İlçe Seçiniz.");
+            return;
+        }
+
+
+        if (odemeTipi != "") {
+            if (odemeTipi == "#KK1" || odemeTipi == "#KKT") {
+                TaksitTablosu(SiparisSonTutar, odemeTipi);
+            } else {
+                $(".TaksitBilgileriContainer").css("display", "none");
+                loading(true);
+                $.ajax({
+                    url: '/Products/siparisiTamamla/',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: veriler,
+                    success: function (data) {
+                        loading(false);
+                        var result = JSON.parse(data);
+                        if (Boolean(result.IsSuccessful)) {
+                            if (JSON.parse(result.Content).statusCode == "200") {
+                                sepetiCek();
+                                $(".shiping-details input[type=text]").val("");
+                                $(".shiping-details textarea").val("");
+                                onayMesaji(JSON.parse(result.Content).message);
+                            } else {
+                                hataMesajı(JSON.parse(result.Content).message);
+                            }
+
+                        } else {
+                            hataMesajı(result.Content);
+                        }
+                    }
+                });
+            }
+
+        } else {
+            hataMesajı("Ödeme Tipi Seçilmelidir.");
+        }
+
+    }
+</script>
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="alert alert-danger" role="alert">
+                <b>Nakit</b> ve <b>Havale</b> Ödeme Tipindeki Siparişler; Firma Onayından Sonra Siparişler Ekranında Görünmektedir.
+            </div>
+            <div class="col-md-6">
+                <div class="checkbox-filter kategorilerListesi">
+
+                    <div class="input-checkbox">
+                        <input type="checkbox" onchange=" sehirleriGetir(); $('.shiping-details').toggle('fast'); $('.shiping-details input[type=text]').val('');$('.shiping-details textarea').val('');" id="farkliSevk">
+                        <label for="farkliSevk"><span></span>Fatura Adresimden Farklı Bir Sevk Adresi Girmek İstiyorum.</label>
+                    </div>
+                </div>
+                <!-- Shiping Details -->
+                <div class="shiping-details" style="display:none">
+                    <div class="section-title">
+                        <h3 class="title">SEVK ADRESİ</h3>
+                    </div>
+
+                    <div class="caption">
+                        <div class="form-group">
+                            <input class="input" type="text" name="first-name" id="ilgiliKisi" placeholder="İlgili Kişi">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="tel" name="tel" id="tel" placeholder="Telefon">
+                        </div>
+                        <div class="form-group">
+                            <select class="input" id="city" onchange="ilceleriGetir()"></select>
+
+                        </div>
+                        <div class="form-group">
+                            <select class="input" id="towN"></select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="input" id="detayliAdres" maxlength="100" placeholder="Detaylı Adres"></textarea>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <!-- /Shiping Details -->
+                <!-- Order notes -->
+                <div class="order-notes">
+                    <textarea class="input" id="siparisNotu" maxlength="100" placeholder="Sipariş Notu"></textarea>
+                </div>
+                <!-- /Order notes -->
+            </div>
+            <!-- Order Details -->
+            <div class="col-md-6">
+
+                <div class="order-summary">
+                    <table class="order-productss" style="width:100%"></table>
+
+                    <div class="sepetTutari"></div>
+
+                </div>
+                <div class="payment-method">
+                    <strong>ÖDEME TİPİ</strong>
+                    <div class="input-radio">
+                        <input type="radio" name="#radio" data-value="#NK" id="payment-3" onchange="odemeTipineGoreFiyatlariGuncelle(this)">
+                        <label for="payment-3">
+                            <span></span>
+                            Nakit
+                        </label>
+
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="#radio" data-value="#HV" id="payment-5" onchange="odemeTipineGoreFiyatlariGuncelle(this)">
+                        <label for="payment-5">
+                            <span></span>
+                            Havale
+                        </label>
+
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="#radio" data-value="#KK1" id="payment-1" onchange="odemeTipineGoreFiyatlariGuncelle(this)">
+                        <label for="payment-1">
+                            <span></span>
+                            Kredi Kartı Tek Çekim
+                        </label>
+
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="#radio" data-value="#KKT" id="payment-2" onchange="odemeTipineGoreFiyatlariGuncelle(this)">
+                        <label for="payment-2">
+                            <span></span>
+                            Kredi Kartı Taksitli
+                        </label>
+
+                    </div>
+                    @*<div class="input-radio">
+                            <input type="radio" name="#radio" data-value="#VD" id="payment-4" onchange="odemeTipineGoreIndirimliFiyatlariGuncelle(this)">
+                            <label for="payment-4">
+                                <span></span>
+                                Vadeli
+                            </label>
+
+                        </div>*@
+
+
+
+                </div>
+
+                <a id="siparisiTamamlaButton" class="primary-btn order-submit" style="cursor:pointer">Siparişi Tamamla</a>
+
+
+
+
+            </div>
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Payment/PaymentInformations.cshtml")
+            </div>
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+

@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Html.Raw(ViewBag.Title)</title>
+    <link rel="shortcut icon" href="~/img/Logo169x70.png" type="image/x-icon" />
+    <link rel="icon" type="image/png" href="~/img/Logo169x70.png" sizes="192x192" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/img/Logo169x70.png" />
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
+
+
+    <script>
+        function loading(statu) {
+            if (Boolean(statu)) {
+                $(".loading").css("display", "block");
+            } else {
+                $(".loading").css("display", "none");
+
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+    <div class="loading" style="display:none"></div>
+    @*@Html.Action("Index", "Menu")*@
+    @{Html.RenderAction("Index", "Header");}
+
+    @RenderBody()
+
+    <footer id="footer">
+       
+        <!-- bottom footer -->
+        <div id="bottom-footer" class="section">
+            <div class="container">
+                <table class="table table-striped table-sm" style="background-color: white;color: black;">
+                    <thead>
+                        <tr>
+                            <th>BANKA ADI</th>
+                            <th>ŞUBE ADI</th>
+                            <th>ŞUBE NO</th>
+                            <th>HESAP NO</th>
+                            <th>İBAN NO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ZİRAAT BANKASI</td>
+                            <td>GAZİ CADDESİ</td>
+                            <td>1781</td>
+                            <td>84709839-5002</td>
+                            <td>TR13 0001 0017 8184 7098 3950 02</td>
+                        </tr>
+                        <tr>
+                            <td>QNB FİNANSBANK</td>
+                            <td>ELAZIĞ</td>
+                            <td>111</td>
+                            <td>7946020</td>
+                            <td>TR09 0011 1000 0000 0107 9460 20</td>
+                        </tr>
+                        <tr>
+                            <td>GARANTİ BANKASI</td>
+                            <td>ELAZIĞ</td>
+                            <td>473</td>
+                            <td>6289828</td>
+                            <td>TR51 0006 2000 4730 0006 2898 28</td>
+                        </tr>
+                        <tr>
+                            <td>HALKBANK</td>
+                            <td>SANAYİ SİTESİ</td>
+                            <td>9332</td>
+                            <td>10261287</td>
+                            <td>TR19 0001 2009 3320 0010 2612 87</td>
+                        </tr>
+                        <tr>
+                            <td>T.İŞBANKASI</td>
+                            <td>ELAZIĞ</td>
+                            <td>8400</td>
+                            <td>3029702</td>
+                            <td>TR06 0006 4000 0018 4003 0297 02</td>
+                        </tr>
+                         <tr>
+                             <td>AKBANK</td>
+                            <td>ELAZIĞ</td>
+                            <td>25</td>
+                            <td>252631</td>
+                            <td>TR06 0004 6000 2588 8000 2526 31</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        
+                        <span class="copyright" style="margin:0">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright © 2022 - <script>document.write(new Date().getFullYear());</script> <a style="color:blue;text-decoration:underline" href="mailto:mehmettokmak184@gmail.com" target="_blank">Mehmet TOKMAK (mehmettokmak184@gmail.com)</a> Her Hakkı Saklıdır.
+
+                        </span>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /bottom footer -->
+    </footer>
+
+
+    <!-- jQuery Plugins -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/nouislider.min.js"></script>
+    <script src="~/js/jquery.zoom.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+    @*<script src="~/js/main.js"></script>*@
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/yardimciFonksyonlar.js"></script>
+    <script src="~/js/sweetalert2.js"></script>
+</body>
+</html>

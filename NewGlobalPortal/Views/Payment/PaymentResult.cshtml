@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "PaymentResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <script>
+        window.onload = function () {
+            var sonuc = "@Html.Raw(ViewBag.Sonuc)";
+            console.log(sonuc.split("&lt;").join("<").split("&#39;").join("'").split("&gt;").join(">"));
+            $(".odemeSonucu").html(sonuc.split("&lt;").join("<").split("&#39;").join("'").split("&gt;").join(">"));
+    }
+    </script>
+
+    <div class="section">
+        @Html.Raw(ViewBag.Hata);
+        <div class="container odemeSonucu">
+
+        </div>
+    </div>
+
+

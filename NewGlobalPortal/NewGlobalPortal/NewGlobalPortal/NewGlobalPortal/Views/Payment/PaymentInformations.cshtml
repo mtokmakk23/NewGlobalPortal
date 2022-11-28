@@ -1,0 +1,229 @@
+﻿<script>
+    function TaksitTablosu(Fiyat,OdemeTipi) {
+        $(".kartBilgileri").css("display", "none");
+        if (Fiyat > 0) {
+            loading(true);
+            $(".TaksitBilgileriContainer").show();
+            var theData = {
+                FiyatStr: Fiyat,
+            }
+            $.ajax({
+                url: '/Payment/taksitlerTablosu/',
+                type: 'POST',
+                dataType: 'text',
+                data: theData,
+                success: function (data) {
+                    $("#taksitTablosu").html(data);
+                    if (OdemeTipi == "#KK1") {
+                        $(".taksitlerTablosuTaksit").remove();
+                    }
+                    if (OdemeTipi == "#KKT") {
+                        $(".taksitlerTablosuTek").remove();
+                    }
+                    loading(false);
+                }
+            });
+        } else {
+            hataMesajı("Ödeme Tutarı 0(Sıfır)'dan Büyük Olmalıdır.");
+            $(".TaksitBilgileriContainer").css("display","none");
+         
+        }
+       
+    }
+
+    function TaksitRadioSec(Radio) {
+        $(".taksitlerTablosu td").css("background-color", "transparent");
+        $(".taksitlerTablosu td").css("color", "black");
+        var nTr = $(Radio).parents('td')[0];
+        $(nTr).css("background-color", "#337ab7");
+        $(nTr).css("color", "white");
+        $(".kartBilgileri").show();
+    }
+
+
+    function OdemeYap() {
+      
+        var posID = -1;
+        var taksitSayisi = -1;
+        var komisyonluTutar = -1;
+        var komisyonsuzTutar = -1;
+        $("input:checked").each(function () {
+          
+            if (this.checked) {
+
+                posID = $(this).attr("data-PosID");
+                taksitSayisi = $(this).attr("data-Taksit");
+                komisyonluTutar = $(this).attr("data-KomisyonluTutar");
+                komisyonsuzTutar = $(this).attr("data-KomisyonsuzTutar");
+            }
+        });
+        if (posID == -1 || taksitSayisi == -1 || komisyonluTutar == -1 || komisyonsuzTutar == -1) {
+            hataMesajı("DİKKAT", "Taksit Seçeneği Seçilmelidir.");
+            return;
+        }
+        var odemeTipi = "";
+        if ($("#payment-1").is(":checked")) {
+            odemeTipi = $("#payment-1").attr("data-value");
+        }
+        if ($("#payment-2").is(":checked")) {
+            odemeTipi = $("#payment-2").attr("data-value");
+        }
+        if ($("#payment-3").is(":checked")) {
+            odemeTipi = $("#payment-3").attr("data-value");
+        }
+        if ($("#payment-4").is(":checked")) {
+            odemeTipi = $("#payment-4").attr("data-value");
+        }
+
+        loading(true);
+        var theData = {
+            POSID: posID,
+            taksit: parseInt(taksitSayisi),
+            komisyonluTutar: komisyonluTutar,
+            komisyonsuzTutar: komisyonsuzTutar,
+            kartAdSoyad: $("#kartAdSoyad").val(),
+            kartNo: $("#kartNo").val().split(' ').join(''),
+            kartTarih: $("#kartTarih").val(),
+            cvv: $("#kartCvv").val(),
+            kartTelefon: $("#kartTelefon").val(),
+            Aciklama: $("#kartAciklama").val(),
+            email: $("#kartMail").val(),
+            BaslikLogicalref: GBaslikRef,
+            OdemeTipi: odemeTipi,
+            ilgiliKisi: $("#ilgiliKisi").val(),
+            tel: $("#tel").val(),
+            detayliAdres: $("#detayliAdres").val(),
+            city: $("#city option:selected").val(),
+            towN: $("#towN option:selected").val(),
+            siparisAciklamasi: $("#siparisNotu").val()
+         
+        }
+         /*
+         $.ajax({
+            url: '/Products/SepetCek/',
+            type: 'POST',
+            dataType: 'text',
+            success: function (data) {
+        */
+        $.ajax({
+            url: '/Payment/OdemeYap/',
+            type: 'POST',
+            dataType: 'text',
+            data: theData,
+            success: function (data) {
+               
+                var result = JSON.parse(data);
+                if (Boolean(result.IsSuccess)) {
+                    window.location = result.ThreeDUrl;
+                } else {
+                    loading(false);
+
+                    hataMesajı(result.InternalMessage)
+                }
+                
+
+            }
+        });
+    }
+
+    function FormatAyarla(myfield, e, dec) {
+        var key;
+        var keychar;
+
+        if (window.event)
+            key = window.event.keyCode;
+        else if (e)
+            key = e.which;
+        else
+            return true;
+        keychar = String.fromCharCode(key);
+
+        if (myfield.id == "kartTarih") {
+            if (key != 8 && key != 46) {
+                if (myfield.value.length == 2) {
+                    myfield.value = myfield.value + "/";
+                }
+            }
+        }
+        if (myfield.id == "kartNo") {
+            if (key != 8 && key != 46) {
+                if (myfield.value.length == 4 || myfield.value.length == 9 || myfield.value.length == 14) {
+                    myfield.value = myfield.value + " ";
+                }
+            }
+        }
+
+    }
+</script>
+<hr />
+<div class="TaksitBilgileriContainer" style="display:none">
+    <div class="section-title">
+        <h3 class="title">TAKSİT SEÇENEKLERİ</h3>
+    </div>
+    <div id="taksitTablosu"></div>
+
+
+    <div class="row kartBilgileri" style="display:none">
+        <div class="section-title">
+            <h3 class="title">KART BİLGİLERİ</h3>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Ad Soyad (*)</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control form-control-sm" style="height: auto" id="kartAdSoyad" placeholder="Kart Üzerindeki İsim">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-3 col-form-label">E-Mail</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" style="height: auto" placeholder="Kart Sahibi E-Mail Adresi" id="kartMail">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Telefon</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" style="height: auto" placeholder="Kart Sahibi Telefon Numarası" id="kartTelefon">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Kart No (*)</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" style="height: auto" maxlength="19" placeholder="Kart No" onkeypress="return TextboxaHarfGirisiniEngelle(this,event)" onkeydown="FormatAyarla(this,event)" id="kartNo">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Tarih (*)</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" style="height: auto" maxlength="5" placeholder="Ay/Yıl" id="kartTarih" onkeypress="return TextboxaHarfGirisiniEngelle(this,event)" onkeydown="FormatAyarla(this,event)">
+                </div>
+                <label for="inputPassword" class="col-sm-2 col-form-label text-right">CVV (*)</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" style="height: auto" maxlength="3" placeholder="CVV" id="kartCvv">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Açıklama</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" style="height: auto" placeholder="Açıklama" id="kartAciklama">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 text-center">
+                <a class="btn btn-primary btn-sm text-white btn-lg" onclick=" OdemeYap()">ÖDEMEYİ TAMAMLA</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 text-center odemeTalimatFormu">
+
+            </div>
+        </div>
+    </div>
+
+</div>

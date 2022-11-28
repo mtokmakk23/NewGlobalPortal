@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "GeneralPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var GBaslikRef = -1;
+    function taksitleriGetir() {
+        Fiyat = parseFloat($("#tutar").val().replace(",",".")).toFixed(2);
+        var odemeTipi = "";
+        if ($("#payment-1").is(":checked")) {
+            odemeTipi = $("#payment-1").attr("data-value");
+        }
+        if ($("#payment-2").is(":checked")) {
+            odemeTipi = $("#payment-2").attr("data-value");
+        }
+        if ($("#payment-3").is(":checked")) {
+            odemeTipi = $("#payment-3").attr("data-value");
+        }
+        if ($("#payment-4").is(":checked")) {
+            odemeTipi = $("#payment-4").attr("data-value");
+        }
+        if (odemeTipi == "") {
+            hataMesajı("Ödeme Tipini Seçiniz.");
+            return;
+        }
+        TaksitTablosu(Fiyat, odemeTipi);
+    }
+
+</script>
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <div class="form-group row" style="margin-top:5px">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Ödeme Tutarı</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="tutar" style="height: auto" onkeypress="return TextboxaHarfGirisiniEngelleVirgulHaric(this,event)" placeholder="0,00">
+            </div>
+            <div class="col-sm-3">
+                <div class="input-radio">
+                    <input type="radio" name="#radio" data-value="#KK1" id="payment-1">
+                    <label for="payment-1">
+                        <span></span>
+                        Kredi Kartı Tek Çekim
+                    </label>
+
+                </div>
+                <div class="input-radio">
+                    <input type="radio" name="#radio" data-value="#KKT" id="payment-2">
+                    <label for="payment-2">
+                        <span></span>
+                        Kredi Kartı Taksitli
+                    </label>
+
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-info btn-sm" onclick="taksitleriGetir()">İleri</a>
+            </div>
+        </div>
+
+
+
+        @Html.Partial("~/Views/Payment/PaymentInformations.cshtml")
+
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Giriş Yap</title>
+    <link rel="shortcut icon" href="~/img/Logo169x70.png" type="image/x-icon" />
+    <link rel="icon" type="image/png" href="~/img/Logo169x70.png" sizes="192x192" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/img/Logo169x70.png" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/LoginStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        function aktivasyonSifresiGonder() {
+            var kullaniciAdi = "";
+            kullaniciAdi = $("#login").val();
+            if (kullaniciAdi == "") {
+                kullaniciAdi = prompt("Kullanıcı Adını Yazınız",""); 
+            }
+            if (kullaniciAdi == "" || kullaniciAdi == undefined) {
+                alert("Kullanıcı Adı Yazılmadan Yenileme Şifresi Alamazsınız!");
+            } else {
+                var veriler = {
+                    kullaniciAdi: $("#login").val()
+                }
+                $.ajax({
+                    url: '/Login/aktivasyonSifresiGonder/',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: veriler,
+                    success: function (data) {
+                        alert(JSON.parse(data).Content);
+                    }
+                });
+            }
+           
+        }
+    </script>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="~/img/logo.png" id="icon" alt="User Icon" />
+            </div>
+
+
+            <!-- Login Form -->
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+            {
+                <input type="text" id="login" class="fadeIn second" name="KullaniciAdi" placeholder="Kullanıcı Adı">
+                <input type="password" id="password" class="fadeIn third" name="Sifre" placeholder="Şifre">
+                <input type="submit" class="btn btn-primary btn-sm" value="Giriş Yap">
+                <a class="text-danger h2">@ViewBag.Mesaj</a>
+            }
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" onclick="aktivasyonSifresiGonder()">Şifremi Unuttum?</a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

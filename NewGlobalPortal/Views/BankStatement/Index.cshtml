@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Hesap Ekstresi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    td, th {
+        white-space: nowrap;
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+        font-family: Arial;
+    }
+</style>
+<script>
+    var tableData;
+
+    window.onload = function () {
+        $(".navigationhesapekstresi").addClass("active");
+        loading(true);
+        $.ajax({
+            url: '/BankStatement/HesapEkstresiniGetir/',
+            type: 'POST',
+            dataType: 'text',
+            success: function (data) {
+                var borc = 0;
+                var alacak = 0;
+                tableData = JSON.parse(data);
+                var tempBorc = "";
+                var tempAlacak = "";
+                for (var i = 0; i < tableData.length; i++) {
+                    borc += parseFloat(tableData[i].borC_TUTAR);
+                    alacak += parseFloat(tableData[i].alacaK_TUTAR);
+                    if (parseFloat(tableData[i].borC_TUTAR) == 0) {
+                        tempBorc = "";
+                    } else {
+                        tempBorc = formatMoney(tableData[i].borC_TUTAR) + "TL";
+                    }
+                    if (parseFloat(tableData[i].alacaK_TUTAR) == 0) {
+                        tempAlacak = "";
+                    } else {
+                        tempAlacak = formatMoney(tableData[i].alacaK_TUTAR)+"TL";
+                    }
+                    var faturaIndirmeLinki = "";
+                    //if (tableData[i].fiS_TIPI =="SATIŞ FATURASI") {
+                    //    faturaIndirmeLinki = '<a onclick="FaturaIndir(\'' + tableData[i].belgE_NO + '\')"><i class="fa-solid fa-file-arrow-down"></i></a>'
+                    //}
+                    $("#exampleTable").append('<tr>' +
+                        '<td>' + tableData[i].belgE_TARIH + '</td>' +
+                        '<td>' + tableData[i].belgE_NO + '</td>' +
+                        '<td>' + tableData[i].carI_KOD + '</td>' +
+                        '<td>' + tableData[i].carI_AD + '</td>' +
+                        '<td>' + tableData[i].kaynaK_PROGRAM + faturaIndirmeLinki+ '</td>' +
+                        '<td style="text-align:right"><b>' + tempBorc+'</b></td>' +
+                        '<td style="text-align:right"><b>' + tempAlacak+'</b></td>' +
+                        '<td>' + tableData[i].aciklamA1 + '</td>' +
+                        '</tr>');
+                }
+
+                var oTable = $('#exampleTable').DataTable({
+                    language: {
+                        url: "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                    },
+                    paging: false,
+                    ordering: false,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'excel'
+                    ]
+                });
+                $("#bakiye").html(formatMoney(borc - alacak)+"TL");
+                $("#toplamAlacak").html(formatMoney(alacak) + "TL");
+                $("#toplamBorc").html(formatMoney(borc) + "TL");
+                loading(false);
+
+               
+            }
+        });
+
+    }
+
+
+    function FaturaIndir(belgeNo) {
+        loading(true);
+        var theData= {
+            BelgeNo:belgeNo
+        }
+        $.ajax({
+            url: '/BankStatement/FaturaIndir/',
+            type: 'POST',
+            dataType: 'text',
+            data: theData,
+            success: function (data) {
+                loading(false);
+                var result = JSON.parse(data);
+                if (Boolean(result.IsSuccessful)) {
+                    var win = window.open("", "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=" + screen.width + ",height=" + screen.height + ",top=0,left=0");
+                    win.document.body.innerHTML = result.Content.split('<table').join('<table style="width:100%"');
+                   // window.open(result.Content);
+                } else {
+                    hataMesajı(result.ErrorMessage);
+                }
+            }
+        });
+    
+    }
+
+    //**************************************************************
+
+
+</script>
+<div class="row">
+    <div class="col-md-4 text-center">
+        <small>Toplam Alacak</small><br />
+        <b style="font-size:20px" id="toplamAlacak"></b>
+    </div>
+    <div class="col-md-4 text-center">
+        <small>Toplam Borç</small><br />
+        <b style="font-size:20px" id="toplamBorc"></b>
+    </div>
+    <div class="col-md-4 text-center">
+        <small>Bakiye</small><br />
+        <b style="font-size:20px" id="bakiye"></b>
+    </div>
+</div>
+
+<div style="overflow:auto;min-height:300px">
+    <table id="exampleTable" class="table table-striped table-sm">
+        <thead style="background-color:#337ab7;color:white">
+            <tr>
+                <th>Tarih</th>
+                <th>Belge No</th>
+                <th>Cari Kodu</th>
+                <th>Cari Adı</th>
+                <th>Tipi</th>
+                <th>Borç</th>
+                <th>Alacak</th>              
+                <th>Açıklama</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

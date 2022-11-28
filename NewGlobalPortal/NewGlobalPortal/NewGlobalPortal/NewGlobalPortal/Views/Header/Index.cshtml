@@ -1,0 +1,157 @@
+﻿
+
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fa fa-phone"></i> +90 530 220 20 73</a></li>
+                <li><a href="#"><i class="fa-solid fa-envelope"></i> info@newglobalinsaat.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> Doğukent Mah. Itri Cd. No:47/BB ELAZIĞ</a></li>
+            </ul>
+            <ul class="header-links pull-right">
+                <li><a href="#"><i class="fa-solid fa-building"></i><small>@ViewBag.BayiAdi</small></a></li>
+                <li><a href="/AdminPanel/Index"><i class="fa-solid fa-user"></i>@ViewBag.KullaniciAdi</a></li>
+                <li> <a href="/Home/Cikis"><i class="fa-solid fa-rectangle-xmark"></i>Çıkış Yap</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="#" class="logo">
+                            <img src="~/img/Logo169x70.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form>
+                            <input class="input" placeholder="Ürün Adını Yazınız">
+                            <a class="search-btn" style="padding: 11px 30px;cursor:pointer" onclick="window.location = '/Products/Index?urun=' + $('.header-search .input').val();">ARA</a>
+                        </form>
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+                        <!-- Wishlist -->
+                        @*<div>
+                            <a href="#">
+                                <i class="fa-solid fa-heart"></i>
+                                <span>Favoriler</span>
+                                <div class="qty">2</div>
+                            </a>
+                        </div>*@
+                        <!-- /Wishlist -->
+                        <!-- Cart -->
+                       
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="cursor:pointer">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Sepet</span>
+                                <div id="sepetMiktari" class="qty">0</div>
+                            </a>
+                            <div class="cart-dropdown" id="sepetIcerigi">
+                                <div class="cart-list">
+
+
+                                </div>
+                                <div class="cart-summary text-right" id="sepetTutari">
+                                    @*<small>3 Item(s) selected</small>*@
+
+
+                                </div>
+                                @{
+                                    try
+                                    {
+                                        if (ViewBag.SiparisOluturabilirMi)
+                                        {
+                                            <div class="cart-btns">
+                                                <a href="#" style="opacity: 0;width: 0;margin: 0;padding: 0;border: none;"></a>
+                                                <a href="~/Products/CompleteOrder" style="width:100%">Siparişi Tamamla  <i class="fa fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        }
+                                    }
+                                    catch (Exception)
+                                    {
+                                        @Html.Action("Index", "Login")
+                                    }
+
+                                }
+
+                            </div>
+                        </div>
+                        <!-- /Cart -->
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+
+
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class="navigationanasayfa"><a href="/Home/Index">Anasayfa</a></li>
+                <li class="navigationurunler"><a href="/Products/Index">Ürünler</a></li>
+                @{
+
+                    if (ViewBag.SiparisleriGorebilirMi)
+                    {
+                        <li class="navigationteklifler"><a href="/Offer/Index">Onay Bekleyen Siparişler</a></li>
+                    }
+                    if (ViewBag.SiparisleriGorebilirMi)
+                    {
+                        <li class="navigationsiparisler"><a href="/Orders/Index">Siparişler</a></li>
+                    }
+                    if (ViewBag.IrsaliyeleriGorebilirMi)
+                    {
+                        <li class="navigationirsaliyeler"><a href="/Dispatch/Index">İrsaliyeler</a></li>
+                    }
+                    if (ViewBag.HesapEkstresiniGorebilirMi)
+                    {
+                        <li class="navigationhesapekstresi"><a href="/BankStatement/Index">Hesap Ekstresi</a></li>
+                    }
+                }
+                <li class="navigationOdemeYap"><a href="/Payment/GeneralPayment">Ödeme Yap</a></li>
+
+
+
+
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+
+
