@@ -27,9 +27,11 @@ namespace NewGlobalPortal.Controllers
         }
         public PaymentController()
         {
+            //https://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc
+            //https://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?wsdl
             aut.UserName = "newglobalyapimuhasebe@gmail.com";
           //  aut.Password = "NewGlobal123?";//demo
-            aut.Password = "12345CeŞA";//canlı
+            aut.Password = "New6238.";//canlı
         }
 
 

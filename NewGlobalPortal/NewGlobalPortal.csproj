@@ -330,7 +330,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService1.disco" />
+    <None Include="Connected Services\SanalPosService\VendorPaymentService.disco" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -417,35 +417,35 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Models\UrunResimleri.ashx" />
-    <None Include="Connected Services\SanalPosService\VendorPaymentService1.wsdl" />
-    <None Include="Connected Services\SanalPosService\VendorPaymentService10.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService.wsdl" />
+    <None Include="Connected Services\SanalPosService\VendorPaymentService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService101.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService102.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService103.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService104.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService105.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService106.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService107.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService108.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SanalPosService\VendorPaymentService109.xsd">
+    <None Include="Connected Services\SanalPosService\VendorPaymentService9.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />

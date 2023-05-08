@@ -19,21 +19,21 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="VendorPaymentService1.disco" MetadataType="Disco" ID="ffa8a57c-8651-4c91-8561-4570087104be" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?disco" />
-    <MetadataFile FileName="VendorPaymentService10.xsd" MetadataType="Schema" ID="3fef5dc3-d7da-4675-bb04-834b1a50e683" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd5" />
-    <MetadataFile FileName="VendorPaymentService1.wsdl" MetadataType="Wsdl" ID="cabe464f-801d-43a0-aa1a-262baadf5701" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?wsdl" />
-    <MetadataFile FileName="VendorPaymentService101.xsd" MetadataType="Schema" ID="d9863582-92cb-4a08-9f80-79fd94c2df45" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd7" />
-    <MetadataFile FileName="VendorPaymentService102.xsd" MetadataType="Schema" ID="9ff2d4aa-18b1-4f1d-8e44-d5d95ba63486" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd6" />
-    <MetadataFile FileName="VendorPaymentService103.xsd" MetadataType="Schema" ID="f505ebda-1132-444c-b1f4-5db76a44f3d0" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd3" />
-    <MetadataFile FileName="VendorPaymentService104.xsd" MetadataType="Schema" ID="ea9f8f13-0cec-4e0f-a6c9-9ff1b39e19d1" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd4" />
-    <MetadataFile FileName="VendorPaymentService105.xsd" MetadataType="Schema" ID="801c5194-f92b-4e41-86e2-daf0dbb3a373" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd8" />
-    <MetadataFile FileName="VendorPaymentService106.xsd" MetadataType="Schema" ID="c68d8b54-df30-4ac3-894a-545d50e9a99f" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd9" />
-    <MetadataFile FileName="VendorPaymentService107.xsd" MetadataType="Schema" ID="0b396ada-e527-47b8-a26f-71ca51022064" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd0" />
-    <MetadataFile FileName="VendorPaymentService108.xsd" MetadataType="Schema" ID="289a9c21-e3ae-4839-a50a-470d38dd7cb6" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd1" />
-    <MetadataFile FileName="VendorPaymentService109.xsd" MetadataType="Schema" ID="ffa37c1a-0a9e-4251-be4c-d92fb6e1b9f9" SourceId="1" SourceUrl="http://boschtermoteknik-tahsilat.com/VendorPayment/VendorPaymentService.svc?xsd=xsd2" />
+    <MetadataFile FileName="VendorPaymentService.xsd" MetadataType="Schema" ID="cf122965-7f47-4a97-bc78-7106b0dd12df" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd9" />
+    <MetadataFile FileName="VendorPaymentService1.xsd" MetadataType="Schema" ID="1a7f8e30-bd81-4c95-a22b-2fefe3eae33e" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd2" />
+    <MetadataFile FileName="VendorPaymentService2.xsd" MetadataType="Schema" ID="2b93c2f9-bdf1-4949-9b85-139157d7b27a" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd1" />
+    <MetadataFile FileName="VendorPaymentService3.xsd" MetadataType="Schema" ID="6c6c27b3-ba11-49f7-a2a9-ef732347efdf" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd0" />
+    <MetadataFile FileName="VendorPaymentService.disco" MetadataType="Disco" ID="d4febdcc-6b53-4e2a-82a6-4d21b0b96e03" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?disco" />
+    <MetadataFile FileName="VendorPaymentService4.xsd" MetadataType="Schema" ID="d77eb727-24a5-4167-8fec-d84cbf54e77f" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd6" />
+    <MetadataFile FileName="VendorPaymentService5.xsd" MetadataType="Schema" ID="680a0cc2-143d-4d49-8bf1-8cb469826169" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd5" />
+    <MetadataFile FileName="VendorPaymentService.wsdl" MetadataType="Wsdl" ID="f22de174-c154-4e40-b5dd-67d3097940c5" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?wsdl" />
+    <MetadataFile FileName="VendorPaymentService6.xsd" MetadataType="Schema" ID="32ded92b-0da0-450b-9734-c2331912c2e4" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd8" />
+    <MetadataFile FileName="VendorPaymentService7.xsd" MetadataType="Schema" ID="fd97b230-cb82-43b8-86ab-19b3e2a252ba" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd3" />
+    <MetadataFile FileName="VendorPaymentService8.xsd" MetadataType="Schema" ID="638386c0-6130-4cdb-8b16-42060117708e" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd7" />
+    <MetadataFile FileName="VendorPaymentService9.xsd" MetadataType="Schema" ID="3707a096-cead-4161-b53a-b13b058fe731" SourceId="1" SourceUrl="http://www.tahsilat.bosch-homecomfort.com.tr/VendorPayment/VendorPaymentService.svc?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
